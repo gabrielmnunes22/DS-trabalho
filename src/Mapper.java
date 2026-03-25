@@ -12,10 +12,10 @@ public class Mapper {
                 char c = text.charAt(i);
 
                 if(c == 'A'){
-                    music += "Lá"
+                    music += "Lá";
                 }
                 else if(c == 'B'){
-                    music += "Si"
+                    music += "Si";
 
                 }
                 else if (c == 'C'){
