@@ -1,52 +1,38 @@
 
-import static java.awt.SystemColor.text;
+import java.util.HashMap;
+import java.util.Map;
 
 //transforma o texto/poema em notas
+
 public class Mapper {
 
-        public static String TextToMusic(String text) {
-            String music = "";
+    private static final Map<Character, String> map = new HashMap<>();
 
+    static{
+        map.put('A', "LÁ");
+        map.put('B', "Si");
+        map.put('C', "Dó");
+        map.put('D', "Ré");
+        map.put('E', "Mi");
+        map.put('F', "Fá");
+        map.put('G', "Sol");
+        map.put('H', "Si Bemol");
 
-            for(int i = 0; i < text.length(); i++ ) {
-                char c = text.charAt(i);
+    }
 
-                if(c == 'A'){
-                    music += "Lá";
-                }
-                else if(c == 'B'){
-                    music += "Si";
+    public static  String textToMusic(String text){
+        StringBuilder music = new StringBuilder();
 
-                }
-                else if (c == 'C'){
-                    music += "Dó";
-
-                }
-                else if (c == 'D'){
-                    music += "Ré";
-
-                }
-                else if (c == 'E'){
-                    music += "Mi";
-
-                }
-                else if (c == 'F'){
-                    music += "Fá";
-
-                }
-                else if (c == 'G'){
-                    music += "Sol";
-
-                }
-                else if (c == 'H'){
-                    music += "Si Bemol";
-
-                }
-
+        for(int i = 0; i< text.length(); i++){
+            char c = Character.toUpperCase(text.charAt(i));
+            if(map.containsKey(c)){
+                music.append(map.get(c)).append(" ");
             }
-
-            return music;
-
         }
-}
 
+        return music.toString();
+
+    }
+
+
+}
