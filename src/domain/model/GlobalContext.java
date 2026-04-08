@@ -25,7 +25,7 @@ public class GlobalContext {
  * Altera o BPM atual somando o delta passado.
  * delta valor a ser somado (positivo para acelerar, negativo para desacelerar).
  */
-    public changeBpm(int delta){
+    public void changeBpm(int delta){
         this.bpm += delta;
 
         if(this.bpm <= 0){

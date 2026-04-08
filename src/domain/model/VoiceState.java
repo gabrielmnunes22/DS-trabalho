@@ -66,10 +66,10 @@ public class VoiceState {
 
     // setters e metodos de regras
 
-    public void setUltimaNota(String ultimaNota){
+    public void setUltimaNota(String nota){
         this.ultimaNota = nota;
     }
-    public void setInstrumentoAtual(int instrumentoAtual){
+    public void setInstrumentoAtual(int instrumento){
         this.instrumentoAtual = instrumento;
 
     }
