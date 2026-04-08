@@ -2,7 +2,7 @@
 
 Estrutura do Projeto
 - src/: código fonte principal
-- classes organizadas por responsabilidade (entities.Model, services.Parser, infrastructure.Player, etc.)
+- classes organizadas por responsabilidade (domain.model.SongModel, services.Parser, infrastructure.Player, etc.)
 
  O projeto pode ser utilizado em qualquer IDE Java, como:
 

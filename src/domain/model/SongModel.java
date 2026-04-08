@@ -1,6 +1,6 @@
 
 /*
- O Model atua como a memória do sistema.
+ O SongModel atua como a memória do sistema.
   Ele não executa a tradução do texto e nem reproduz o áudio; sua função exclusiva é armazenar
   o estado atual da música, como volume atual, instrumento selecionado e a
   última nota processada, além de definir as estruturas e os moldes dos comandos musicais
@@ -9,7 +9,9 @@
 
 
 
-package entities;
+package domain.model;
 
-public class Model {
+public class SongModel {
+
+
 }
