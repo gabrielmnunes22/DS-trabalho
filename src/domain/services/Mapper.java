@@ -13,6 +13,9 @@ public class Mapper {
 
     //ele pode devolver qualquer classe que tenha assinado o contrato
 
+    public AcaoMusical mapearMiBemol(){
+        return new TocarNotaAcao("Eb");
+    }
 
     public AcaoMusical mapearCaractere(char caractere){
 
@@ -58,7 +61,7 @@ public class Mapper {
             case '?':
                 return new MudarOitavaAcao(1);
             case 'V':
-                 return new MudarOitavaAcao(-1);
+                return new MudarOitavaAcao(-1);
 
             // Se for uma letra que não faz nada ou não reconhecida, retornamos null
             // (Mais para frente podemos criar uma 'PausaAcao' ou apenas ignorar)

@@ -19,7 +19,7 @@ public class Main {
 //                        "[4] C C D D E E F F";     // Voz 2 (Piano) espera 4 tempos
 
         String textoDaTela =
-                "G A H C 2 D E F G";
+                "M A Mb C ; G A Mb M";
 
         System.out.println("Texto recebido:");
         System.out.println(textoDaTela);

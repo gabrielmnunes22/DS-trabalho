@@ -38,10 +38,20 @@ public class Parser {
             // Transformamos a linha "C D > E" num array de letras e passamos por cada uma
             char[] letrasDaLinha = linhaAtual.toCharArray();
 
-            for (char letra : letrasDaLinha) {
+            for (int j = 0; j < letrasDaLinha.length; j++) {        // mudança: para tratar o caso 'Mb' precisamos ter acesso à próxima letra.
 
                 // Pedimos para o Dicionário fabricar a ação correspondente a essa letra
-                AcaoMusical acao = mapper.mapearCaractere(letra);
+                char letra = letrasDaLinha[j];
+                char proximaLetra = (j + 1 < letrasDaLinha.length) ? letrasDaLinha[j + 1] : '\0';
+
+                AcaoMusical acao;
+
+                if(letra == 'M' && proximaLetra == 'b'){            // se 'Mb', consumimos a letra 'b' para evitar geração de Pausa(R).
+                    j++;
+                    acao = mapper.mapearMiBemol();
+                }else{
+                    acao = mapper.mapearCaractere(letra);
+                }
 
                 if (acao != null) {
                     // Se o Dicionário reconheceu a letra (ex: 'C', ' ', '?', '>'), 
