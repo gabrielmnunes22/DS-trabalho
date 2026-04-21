@@ -71,7 +71,6 @@ public class VoiceState {
     }
     public void setInstrumentoAtual(int instrumento){
         this.instrumentoAtual = instrumento;
-
     }
     /**
      * Caractere '?' - Aumenta uma oitava (limite máximo 9).

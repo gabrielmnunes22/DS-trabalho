@@ -62,6 +62,14 @@ public class Parser {
                                     .append(estadoVoz.getVolumeAtual());
                         }
                         stringJFugue.append(" ");
+
+                    } else if (ehDigitoPar(letra)) {
+                        // neste caso 'letra' é um char que representa um dígito. Ex: '7' - '0' = 7
+                        // novoInstrumento = instrumento atual + dígito
+                        String novoInstrumento = "I" + String.valueOf(estadoVoz.getInstrumentoAtual() + (letra - '0')) + " ";
+                        System.out.printf("Novo instrumento: %s\n", novoInstrumento);
+                        stringJFugue.append(novoInstrumento);
+
                     } else {
                         // Se for uma consoante qualquer ou símbolo não mapeado, vira pausa (Rest)
                         stringJFugue.append("R ");
@@ -99,5 +107,13 @@ public class Parser {
     private boolean ehVogal(char c) {
         char letra = Character.toUpperCase(c);
         return letra == 'O' || letra == 'I' || letra == 'U';
+    }
+
+    private boolean ehDigitoPar(char c) {
+        if (Character.isDigit(c)) {
+            int digito = c - '0';       // transformo char em inteiro. Ex = '7' vira 7
+            return digito % 2 == 0;     // dígito é par?
+        }
+        return false;
     }
 }

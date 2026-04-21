@@ -14,7 +14,6 @@ public class MudarOitavaAcao implements AcaoMusical {
     @Override
     public String executar(VoiceState estadoVoz, GlobalContext contextoGlobal) {
 
-        // AQUI NÓS USAMOS OS MÉTODOS QUE VOCÊ MOSTROU NA FOTO!
         if (this.direcao > 0) {
             estadoVoz.aumentarOitava(); // Chama o método da TV
         } else if (this.direcao < 0) {
