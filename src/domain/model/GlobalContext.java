@@ -7,10 +7,15 @@ package domain.model;
  */
 
 public class GlobalContext {
+
+    private static final int BPM_PADRAO = 120;
+    private static final int BPM_MINIMO = 10;
+    private static final int BPM_LIMITE_ZERO = 0;
+
     private int bpm;
 
     public GlobalContext() {
-        this.bpm = 120; // valor padrão de BPM
+        this.bpm = BPM_PADRAO; // valor padrão de BPM
     }
 
     public int getBpm() {
@@ -28,8 +33,8 @@ public class GlobalContext {
     public void changeBpm(int delta){
         this.bpm += delta;
 
-        if(this.bpm <= 0){
-            this.bpm = 10; //limite de seguranca para nao zerar
+        if(this.bpm <= BPM_LIMITE_ZERO){
+            this.bpm = BPM_MINIMO; //limite de seguranca para nao zerar
         }
     }
 

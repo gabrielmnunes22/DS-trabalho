@@ -10,6 +10,14 @@ import domain.actions.TrocarInstrumentoAcao;
 // liga letra/caracter com comando
 public class Mapper {
 
+    // constantes - número instrumentos JFUGUE
+    private static final int ACORDEAO = 22;
+    private static final int TUBULAR_BELLS = 15;
+    private static final int CHURCH_ORGAN = 20;
+
+    // constantes - aceleração e desaceleração BPM
+    private static final int ACELERACAO = 10;
+    private static final int DESACELARACAO = -10;
 
     //ele pode devolver qualquer classe que tenha assinado o contrato
 
@@ -37,15 +45,15 @@ public class Mapper {
 
             // Trocar instrumento para GM #22 (acordeão)
             case '!':
-                return new TrocarInstrumentoAcao(22);
+                return new TrocarInstrumentoAcao(ACORDEAO);
 
             // Trocar instrumento para GM #15 (Tubular Bells)
             case ';':
-                return new TrocarInstrumentoAcao(15);
+                return new TrocarInstrumentoAcao(TUBULAR_BELLS);
 
             // Trocar instrumento para GM #20 (Church Organ)
             case ',':
-                return new TrocarInstrumentoAcao(20);
+                return new TrocarInstrumentoAcao(CHURCH_ORGAN);
 
             // VOLUME
             case ' ': // espaco em branco
@@ -53,15 +61,15 @@ public class Mapper {
 
             // Bpm
             case '>':
-                return new MudarBpmAcao(10); // acelera 10
+                return new MudarBpmAcao(ACELERACAO); // acelera 10
             case '<':
-                new MudarBpmAcao(-10); // desacelera 10
+                new MudarBpmAcao(DESACELARACAO); // desacelera 10
 
             // --- OITAVAS (Você pode criar as classes depois e descomentar aqui) ---
             case '?':
-                return new MudarOitavaAcao(1);
+                return new MudarOitavaAcao(1);  // oitava = oitava + 1
             case 'V':
-                return new MudarOitavaAcao(-1);
+                return new MudarOitavaAcao(-1); // oitava = oitava - 1
 
             // Se for uma letra que não faz nada ou não reconhecida, retornamos null
             // (Mais para frente podemos criar uma 'PausaAcao' ou apenas ignorar)
