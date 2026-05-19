@@ -1,15 +1,44 @@
 package ui;
 
+import config.Config;
+import infrastructure.ServidorWeb;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
 
-/*
-  Esta classe será responsável por desenhar a tela do sistema.
-  Seu papel principal será capturar o texto de entrada digitado no campo de texto
-  e repassá-lo para o Parser processar, além de permitir que o usuário configure
-  os parâmetros iniciais da música (como BPM, instrumento e volume),
-  NADA ALEM DISSO
-   */
+public class TelaInicial {
 
-public class TelaInicial
-{
+    private final ServidorWeb servidor;
+    private final MusicaController controller;
+    private final int porta;
+
+    public TelaInicial(int porta, String pastaPublica, MusicaController controller) throws IOException {
+        this.porta = porta;
+        this.controller = controller;
+        this.servidor = new ServidorWeb(porta, pastaPublica, controller);
+    }
+
+    public void exibirTela() {
+        try {
+            servidor.iniciar();
+
+            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                Desktop.getDesktop().browse(URI.create("http://localhost:" + porta));
+            }
+
+            System.out.println("Interface aberta em: http://localhost:" + porta);
+
+        } catch (IOException e) {
+            System.out.println("Erro ao iniciar a interface: " + e.getMessage());
+        }
+    }
+
+    public String obterTextoDigitado() {
+        return controller.getUltimoTextoRecebido();
+    }
+
+    public Config obterConfigDaTela() {
+        return null;
+    }
 }

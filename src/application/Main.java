@@ -2,40 +2,28 @@ package application;
 
 import domain.services.Parser;
 import infrastructure.ReprodutorAudio;
+import ui.MusicaController;
+import ui.TelaInicial;
 
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("🎹 Iniciando o Gerador de Música TCP...");
+        try {
+            Parser processador = new Parser();
+            ReprodutorAudio reprodutor = new ReprodutorAudio();
+            MusicaController controller = new MusicaController(processador, reprodutor);
 
-        // CRIANDO O MAESTRO E CAIXA DE SOM
-        Parser parser = new Parser();
-        ReprodutorAudio reprodutor = new ReprodutorAudio();
+            String pastaPublica = System.getProperty("user.dir");
+            int porta = 8080;
 
-        // TESTE PARA VER SE ESTA FUNCIONANDO O CODIGO
-        String textoDaTela =
-                "[0] C D E F G A B C H\n" +  // Voz 0 (Cravo) começa na hora
-                        "[2] E F G A B C D E E RF D DF F FDF FD AFDF FDF \n" +  // Voz 1 (Órgão) espera 2 tempos
-                        "[4] C C D D E E F F";     // Voz 2 (Piano) espera 4 tempos
+            TelaInicial tela = new TelaInicial(porta, pastaPublica, controller);
+            tela.exibirTela();
 
-//        String textoDaTela =
-//                "M A Mb C ; G A Mb M";
+            System.out.println("Pressione Ctrl+C para encerrar.");
 
-        System.out.println("Texto recebido:");
-        System.out.println(textoDaTela);
-        System.out.println("--------------------------------------------------");
-
-        // parser traduz o texto
-        String partituraJFugue = parser.parsearTexto(textoDaTela);
-
-        System.out.println("String traduzida para o JFugue:");
-        System.out.println(partituraJFugue);
-        System.out.println("--------------------------------------------------");
-
-        // infraestrutura toca a música na caixa de som
-        reprodutor.tocarMusica(partituraJFugue);
-
-        // Salva o arquivo MIDI na mesma pasta do projeto
-        reprodutor.exportarParaMidi(partituraJFugue, "minha_primeira_fuga.mid");
+        } catch (Exception e) {
+            System.out.println("Erro ao iniciar: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

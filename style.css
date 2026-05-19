@@ -1,0 +1,412 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Share Tech Mono', monospace;
+  background: #2b2b2b;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(60,60,60,0.4) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(50,50,50,0.3) 0%, transparent 50%);
+  color: #e0e0e0;
+  margin: 0;
+  padding: 24px;
+  min-height: 100vh;
+}
+
+/* --- TITULO FISICO (placa metalica gravada) --- */
+h1 {
+  font-family: 'Orbitron', sans-serif;
+  color: #c8c8c8;
+  margin: 0 0 4px 0;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  background: linear-gradient(180deg, #4a4a4a 0%, #3a3a3a 40%, #2e2e2e 100%);
+  display: inline-block;
+  padding: 10px 28px;
+  border-radius: 3px;
+  border-top: 1px solid #666;
+  border-left: 1px solid #555;
+  border-right: 1px solid #222;
+  border-bottom: 1px solid #1a1a1a;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+  text-shadow: 0 -1px 0 #000, 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.subtitle {
+  color: #555;
+  font-size: 11px;
+  margin: 8px 0 20px 0;
+  letter-spacing: 1px;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+}
+
+/* --- TEXTAREA (tela LCD) --- */
+textarea {
+  width: 70%;
+  height: 420px;
+  padding: 14px;
+  font-size: 15px;
+  font-family: 'Share Tech Mono', monospace;
+  resize: none;
+  background: #0a0f0a;
+  color: #40ff40;
+  border: 3px solid #555;
+  border-radius: 4px;
+  box-shadow:
+    inset 0 2px 10px rgba(0,0,0,0.8),
+    inset 0 0 30px rgba(0,0,0,0.4),
+    0 1px 0 rgba(255,255,255,0.05);
+  border-top-color: #333;
+  border-left-color: #444;
+  border-right-color: #666;
+  border-bottom-color: #777;
+}
+
+textarea::placeholder {
+  color: #1a4a1a;
+  font-size: 13px;
+}
+
+textarea:focus {
+  outline: none;
+  box-shadow:
+    inset 0 2px 10px rgba(0,0,0,0.8),
+    inset 0 0 30px rgba(0,0,0,0.4),
+    0 0 6px rgba(64,255,64,0.1),
+    0 1px 0 rgba(255,255,255,0.05);
+}
+
+/* --- PAINEL LATERAL (modulo de hardware) --- */
+.panel {
+  width: 30%;
+  background: linear-gradient(180deg, #383838 0%, #2e2e2e 50%, #282828 100%);
+  padding: 18px;
+  border-radius: 5px;
+  border-top: 1px solid #555;
+  border-left: 1px solid #4a4a4a;
+  border-right: 1px solid #222;
+  border-bottom: 1px solid #1a1a1a;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.panel h3 {
+  font-family: 'Orbitron', sans-serif;
+  color: #f0a030;
+  margin: 0 0 16px 0;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #444;
+  text-shadow: 0 0 8px rgba(240,160,48,0.3);
+}
+
+.panel label {
+  display: block;
+  margin-top: 16px;
+  font-size: 10px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.panel select {
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px 10px;
+  background: #1a1a1a;
+  color: #ccc;
+  border: 1px solid #555;
+  border-radius: 3px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  cursor: pointer;
+  border-top-color: #333;
+  border-bottom-color: #666;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.panel select:focus {
+  outline: none;
+  border-color: #f0a030;
+}
+
+/* --- FADERS (slider fisico estilo mixer) --- */
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  background: #222;
+  padding: 10px 12px;
+  border-radius: 4px;
+  border: 1px solid #3a3a3a;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
+}
+
+.slider-row span {
+  min-width: 38px;
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  color: #f0a030;
+  background: #0a0a0a;
+  padding: 5px 6px;
+  border-radius: 2px;
+  border: 1px solid #444;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.6);
+  text-shadow: 0 0 6px rgba(240,160,48,0.4);
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 6px;
+  background: #111;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.8);
+  border: 1px solid #333;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 32px;
+  cursor: grab;
+  border-radius: 2px;
+  border: 1px solid #222;
+  background:
+    linear-gradient(180deg,
+      #bbb 0%,
+      #999 8%,
+      #777 15%,
+      #aaa 20%,
+      #666 35%,
+      #888 45%,
+      #444 50%,
+      #888 55%,
+      #666 65%,
+      #aaa 80%,
+      #777 85%,
+      #999 92%,
+      #bbb 100%
+    );
+  box-shadow:
+    0 0 1px rgba(255,255,255,0.2),
+    0 3px 6px rgba(0,0,0,0.6),
+    inset 0 0 1px rgba(255,255,255,0.1);
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  background:
+    linear-gradient(180deg,
+      #d4a050 0%,
+      #c08030 8%,
+      #a06020 15%,
+      #c08838 20%,
+      #905818 35%,
+      #b07828 45%,
+      #704010 50%,
+      #b07828 55%,
+      #905818 65%,
+      #c08838 80%,
+      #a06020 85%,
+      #c08030 92%,
+      #d4a050 100%
+    );
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 32px;
+  cursor: grab;
+  border-radius: 2px;
+  border: 1px solid #222;
+  background:
+    linear-gradient(180deg,
+      #bbb 0%, #999 8%, #777 15%, #aaa 20%,
+      #666 35%, #888 45%, #444 50%, #888 55%,
+      #666 65%, #aaa 80%, #777 85%, #999 92%, #bbb 100%
+    );
+  box-shadow: 0 3px 6px rgba(0,0,0,0.6);
+}
+
+input[type="range"]::-moz-range-track {
+  height: 6px;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.8);
+}
+
+/* --- BOTOES FISICOS --- */
+.buttons {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+button {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  position: relative;
+  transition: all 0.08s ease;
+
+  padding: 0;
+  width: auto;
+  color: #ddd;
+}
+
+button .btn-face {
+  display: block;
+  padding: 12px 22px;
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.08s ease;
+}
+
+/* --- Efeito de botao que aperta (3D fisico) --- */
+
+/* Base escura compartilhada */
+.load, .save-txt, .play, .stop, .midi {
+  border-radius: 4px;
+}
+
+/* Botoes cinza escuro (carregar, salvar txt, salvar midi) */
+.load, .save-txt, .midi {
+  background: #1a1a1a;
+  box-shadow:
+    0 6px 0 #0e0e0e,
+    0 8px 10px rgba(0,0,0,0.5);
+}
+.load .btn-face, .save-txt .btn-face, .midi .btn-face {
+  background: linear-gradient(180deg, #5a5a5a 0%, #454545 40%, #3a3a3a 100%);
+  border-top: 1px solid #6e6e6e;
+  border-bottom: 1px solid #252525;
+  color: #d0d0d0;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+}
+
+/* Botao vermelho (parar) */
+.stop {
+  background: #2a0e0e;
+  box-shadow:
+    0 6px 0 #1a0808,
+    0 8px 10px rgba(0,0,0,0.5);
+}
+.stop .btn-face {
+  background: linear-gradient(180deg, #7a2a2a 0%, #5a1a1a 40%, #481414 100%);
+  border-top: 1px solid #944;
+  border-bottom: 1px solid #311;
+  color: #e8b0b0;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+}
+
+/* Botao verde (gerar musica) — destaque principal */
+.play {
+  background: #0e2a0e;
+  box-shadow:
+    0 6px 0 #081a08,
+    0 8px 10px rgba(0,0,0,0.5);
+}
+.play .btn-face {
+  background: linear-gradient(180deg, #3a6a3a 0%, #2a5028 40%, #1e3e1c 100%);
+  border-top: 1px solid #4a8a4a;
+  border-bottom: 1px solid #142e14;
+  color: #b8e8b8;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow:
+    0 2px 0 rgba(0,0,0,0.6),
+    0 3px 4px rgba(0,0,0,0.3);
+}
+
+button:active:not(:disabled) .btn-face {
+  filter: brightness(0.9);
+}
+
+button:hover:not(:disabled) .btn-face {
+  filter: brightness(1.1);
+}
+
+button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* --- STATUS (LED indicator) --- */
+.status {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.status::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #555, #333);
+  border: 1px solid #222;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.5), 0 0 2px rgba(0,0,0,0.3);
+  flex-shrink: 0;
+}
+
+.status.tocando {
+  color: #40ff40;
+}
+
+.status.tocando::before {
+  background: radial-gradient(circle at 35% 35%, #80ff80, #20cc20);
+  border-color: #1a8a1a;
+  box-shadow:
+    inset 0 1px 2px rgba(255,255,255,0.3),
+    0 0 8px rgba(64,255,64,0.5),
+    0 0 20px rgba(64,255,64,0.2);
+  animation: ledPulse 1.2s ease-in-out infinite;
+}
+
+.status.erro {
+  color: #ff5050;
+}
+
+.status.erro::before {
+  background: radial-gradient(circle at 35% 35%, #ff8080, #cc2020);
+  border-color: #8a1a1a;
+  box-shadow:
+    inset 0 1px 2px rgba(255,255,255,0.3),
+    0 0 8px rgba(255,64,64,0.5),
+    0 0 20px rgba(255,64,64,0.2);
+}
+
+@keyframes ledPulse {
+  0%, 100% { opacity: 1; box-shadow: inset 0 1px 2px rgba(255,255,255,0.3), 0 0 8px rgba(64,255,64,0.5), 0 0 20px rgba(64,255,64,0.2); }
+  50% { opacity: 0.6; box-shadow: inset 0 1px 2px rgba(255,255,255,0.1), 0 0 4px rgba(64,255,64,0.2), 0 0 8px rgba(64,255,64,0.1); }
+}

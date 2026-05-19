@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerador Musical</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Gerador Musical</h1>
+  <div class="subtitle">Gerador de Sequencias Musicais a Partir de Texto</div>
+
+  <div class="container">
+
+    <textarea id="texto" placeholder="Digite o texto aqui...&#10;&#10;Cada linha = uma voz diferente&#10;Use [n] no inicio para atraso em beats&#10;&#10;Exemplo:&#10;[0] C D E F G A B C H&#10;[2] E F G A B C D E&#10;[4] C C D D E E F F"></textarea>
+
+    <div class="panel">
+      <h3>Configuracoes</h3>
+
+      <label>BPM</label>
+      <div class="slider-row">
+        <input type="range" id="bpm" min="40" max="300" value="120">
+        <span id="bpmValor">120</span>
+      </div>
+
+      <label>Instrumento Inicial</label>
+      <select id="instrumento">
+        <option value="0">0 - Piano</option>
+        <option value="6" selected>6 - Cravo (Harpsichord)</option>
+        <option value="7">7 - Clavinet</option>
+        <option value="15">15 - Tubular Bells</option>
+        <option value="20">20 - Church Organ</option>
+        <option value="22">22 - Harmonica</option>
+        <option value="24">24 - Guitar (nylon)</option>
+        <option value="40">40 - Violin</option>
+        <option value="48">48 - String Ensemble</option>
+        <option value="56">56 - Trumpet</option>
+        <option value="70">70 - Fagote (Bassoon)</option>
+        <option value="71">71 - Clarinet</option>
+        <option value="73">73 - Flute</option>
+        <option value="110">110 - Bag Pipe</option>
+        <option value="114">114 - Agogo</option>
+        <option value="123">123 - Sea Shore</option>
+      </select>
+
+      <label>Volume</label>
+      <div class="slider-row">
+        <input type="range" id="volume" min="0" max="127" value="100">
+        <span id="volumeValor">100</span>
+      </div>
+
+      <label>Oitava Padrao</label>
+      <select id="oitava">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6" selected>6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button class="load" id="btnCarregar"><span class="btn-face">Carregar Arquivo</span></button>
+    <button class="save-txt" id="btnSalvarTxt"><span class="btn-face">Salvar TXT</span></button>
+    <button class="play" id="btnTocar"><span class="btn-face">Gerar Musica</span></button>
+    <button class="stop" id="btnParar" disabled><span class="btn-face">Parar</span></button>
+    <button class="midi" id="btnSalvarMidi"><span class="btn-face">Salvar MIDI</span></button>
+  </div>
+
+  <div class="status" id="status">
+    Status: Parado
+  </div>
+
+  <input type="file" id="fileInput" accept=".txt" style="display:none">
+
+  <script src="script.js"></script>
+
+</body>
+</html>

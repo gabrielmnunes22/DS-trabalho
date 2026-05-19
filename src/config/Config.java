@@ -1,19 +1,42 @@
-
-
-/*  na definicao do trabalho o usuario podera fazer algumas configuracao
-      como defenir o volumume inicial, o instrumento inicial e a BPM inicial
-      tudo isso antes de tocar a musica, pois depois de tocar a musica o usuario
-      nao podera alterar nada, somente a musica ditara o que o programa de fazzer,
-      s trocar de instrumento, aumentar volume e mudar o batimento
-   */
-    /*
-    aqui na config.java poderiamos construir a parte que o usuario podera customizar no inicio
-     */
-
 package config;
-
-
 
 public class Config {
 
+    private final int bpmInicial;
+    private final int volumeInicial;
+    private final int instrumentoInicial;
+    private final int oitavaPadrao;
+
+    public Config(int bpmInicial, int volumeInicial, int instrumentoInicial, int oitavaPadrao) {
+        this.bpmInicial = bpmInicial;
+        this.volumeInicial = volumeInicial;
+        this.instrumentoInicial = instrumentoInicial;
+        this.oitavaPadrao = oitavaPadrao;
+    }
+
+    public int getBpmInicial() {
+        return bpmInicial;
+    }
+
+    public int getVolumeInicial() {
+        return volumeInicial;
+    }
+
+    public int getInstrumentoInicial() {
+        return instrumentoInicial;
+    }
+
+    public int getOitavaPadrao() {
+        return oitavaPadrao;
+    }
+
+    @Override
+    public String toString() {
+        return "Config{" +
+                "bpm=" + bpmInicial +
+                ", volume=" + volumeInicial +
+                ", instrumento=" + instrumentoInicial +
+                ", oitava=" + oitavaPadrao +
+                '}';
+    }
 }
