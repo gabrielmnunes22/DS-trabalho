@@ -50,7 +50,7 @@ public class Mapper {
             case '>':
                 return new MudarBpmAcao(ACELERACAO);
             case '<':
-                new MudarBpmAcao(DESACELARACAO);
+                return new MudarBpmAcao(DESACELARACAO);
 
             case '?':
                 return new MudarOitavaAcao(1);

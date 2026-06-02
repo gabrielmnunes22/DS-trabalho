@@ -9,12 +9,11 @@ import java.io.IOException;
 
 public class ReprodutorAudio {
 
-    public void tocarMusica(String stringJFugue) {
+    public void tocarMusica(String stringJFugue, Player player) {
         Pattern partitura = new Pattern(stringJFugue);
-        Player jfuguePlayer = new Player();
 
         System.out.println("Tocando a musica...");
-        jfuguePlayer.play(partitura);
+        player.play(partitura);
         System.out.println("Musica finalizada!");
     }
 

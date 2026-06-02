@@ -3,6 +3,7 @@ package infrastructure;
 import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.HttpExchange;
 import config.Config;
+import domain.model.ConfiguracaoMusical;
 import ui.MusicaController;
 
 import java.io.*;
@@ -46,10 +47,13 @@ public class ServidorWeb {
         if (!validarPost(exchange)) return;
 
         try {
-            String texto = extrairTextoDoBody(exchange);
+            String corpo = new String(exchange.getRequestBody().readAllBytes(), "UTF-8");
+            String texto = extrairValorJson(corpo, "texto");
             if (texto == null) return;
 
-            String partitura = controller.tocar(texto);
+            ConfiguracaoMusical config = extrairConfiguracao(corpo);
+
+            String partitura = controller.tocar(texto, config);
 
             enviarJson(exchange, 200,
                 "{\"status\": \"tocando\", \"partitura\": \"" + escapar(partitura) + "\"}");
@@ -70,10 +74,13 @@ public class ServidorWeb {
         if (!validarPost(exchange)) return;
 
         try {
-            String texto = extrairTextoDoBody(exchange);
+            String corpo = new String(exchange.getRequestBody().readAllBytes(), "UTF-8");
+            String texto = extrairValorJson(corpo, "texto");
             if (texto == null) return;
 
-            byte[] midiBytes = controller.gerarMidi(texto);
+            ConfiguracaoMusical config = extrairConfiguracao(corpo);
+
+            byte[] midiBytes = controller.gerarMidi(texto, config);
 
             exchange.getResponseHeaders().set("Content-Type", "audio/midi");
             exchange.getResponseHeaders().set("Content-Disposition", "attachment; filename=\"musica.mid\"");
@@ -187,5 +194,25 @@ public class ServidorWeb {
                     .replace("\"", "\\\"")
                     .replace("\n", "\\n")
                     .replace("\r", "\\r");
+    }
+
+    private ConfiguracaoMusical extrairConfiguracao(String corpo) {
+        String bpmStr         = extrairValorJson(corpo, "bpm");
+        String volumeStr      = extrairValorJson(corpo, "volume");
+        String oitavaStr      = extrairValorJson(corpo, "oitava");
+        String instrumentoStr = extrairValorJson(corpo, "instrumento");
+
+        int bpm         = parseSafe(bpmStr, 120);
+        int volume      = parseSafe(volumeStr, 100);
+        int oitava      = parseSafe(oitavaStr, 6);
+        int instrumento = parseSafe(instrumentoStr, 6);
+
+        return new ConfiguracaoMusical(bpm, volume, oitava, instrumento);
+    }
+
+    private int parseSafe(String valor, int padrao) {
+        if (valor == null) return padrao;
+        try { return Integer.parseInt(valor.trim()); }
+        catch (NumberFormatException e) { return padrao; }
     }
 }

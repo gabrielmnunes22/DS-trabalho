@@ -1,6 +1,7 @@
 package domain.services;
 
 import domain.actions.AcaoMusical;
+import domain.model.ConfiguracaoMusical;
 import domain.model.GlobalContext;
 import domain.model.VoiceState;
 
@@ -12,9 +13,12 @@ public class Parser {
         this.mapper = new Mapper();
     }
 
-    public String parsearTexto(String textoBruto) {
+    public String parsearTexto(String textoBruto, ConfiguracaoMusical config) {
         GlobalContext contextoGlobal = new GlobalContext();
+        contextoGlobal.setBpm(config.getBpm());
+
         StringBuilder stringJFugue = new StringBuilder();
+        stringJFugue.append("T").append(contextoGlobal.getBpm()).append(" ");
 
         String[] linhas = textoBruto.split("\\r?\\n");
 
@@ -25,7 +29,7 @@ public class Parser {
                 continue;
             }
 
-            VoiceState estadoVoz = new VoiceState(i);
+            VoiceState estadoVoz = new VoiceState(i, config);
 
             stringJFugue.append("V").append(i).append(" ");
             stringJFugue.append("I").append(estadoVoz.getInstrumentoAtual()).append(" ");

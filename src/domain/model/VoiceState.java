@@ -25,7 +25,7 @@ public class VoiceState {
     private static final int FAGOTE = 70;
 
     // constantes - parâmetros globais
-    private static final int VOLUME_MAXIMO = 120;
+    private static final int VOLUME_MAXIMO = 127;
     private static final int OITAVA_MAXIMA = 9;
     private static final int OITAVA_MINIMA = 0;
 
@@ -36,11 +36,16 @@ public class VoiceState {
 
 
     // idVoz = linha atual do arquivo texto. "Cada linha representa uma voz diferente"
-    public VoiceState(int idVoz){
+    public VoiceState(int idVoz, ConfiguracaoMusical config){
         this.idVoz = idVoz;
         this.ultimaNota = "R"; // R == pause na biblio JFugue
         inicializarValoresCiclicosBase();
 
+        if (idVoz == 0) {
+            this.volumeAtual      = Math.min(config.getVolume(), VOLUME_MAXIMO);
+            this.oitavaAtual      = Math.max(OITAVA_MINIMA, Math.min(config.getOitava(), OITAVA_MAXIMA));
+            this.instrumentoAtual = config.getInstrumento();
+        }
     }
 
     /*
