@@ -6,6 +6,12 @@ import domain.actions.MudarBpmAcao;
 import domain.actions.MudarOitavaAcao;
 import domain.actions.DobrarVolumeAcao;
 import domain.actions.TrocarInstrumentoAcao;
+import domain.model.GlobalContext;
+import domain.model.VoiceState;
+import domain.rules.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class Mapper {
 
@@ -18,6 +24,15 @@ public class Mapper {
 
     public AcaoMusical mapearMiBemol(){
         return new TocarNotaAcao("Eb");
+    }
+
+    public AcaoMusical mapearCaractere(char c, char proxima, VoiceState voz, GlobalContext ctx) {
+        for (RegraDeCaractere regra : cadeia) {
+            if (regra.aceita(c, proxima, voz, ctx)) {
+                return regra.resolver(c, voz, ctx);
+            }
+        }
+        return new domain.actions.RepetirNotaAcao(); // segurança — nunca deve chegar aqui
     }
 
     public AcaoMusical mapearCaractere(char caractere){
@@ -61,4 +76,18 @@ public class Mapper {
                 return null;
             }
         }
+
+        private final List<RegraDeCaractere> cadeia = Arrays.asList(
+            new RegraMiBemol(),
+            new RegraNotas(),
+            new RegraNotaH(),
+            new RegraEspaco(),
+            new RegraInstrumento(),
+            new RegraOitava(),
+            new RegraBpm(),
+            new RegraDigitoPar(),
+            new RegraDigitoImpar(),
+            new RegraVogal(),
+            new RegraElse()
+    );
     }

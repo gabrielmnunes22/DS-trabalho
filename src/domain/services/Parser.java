@@ -25,6 +25,48 @@ public class Parser {
         for (int i = 0; i < linhas.length; i++) {
             String linhaAtual = linhas[i].trim();
 
+            if (linhaAtual.isEmpty()) continue;
+
+            VoiceState estadoVoz = new VoiceState(i, config);
+
+            stringJFugue.append("V").append(i).append(" ");
+            stringJFugue.append("I").append(estadoVoz.getInstrumentoAtual()).append(" ");
+
+            linhaAtual = processarAtrasoInicial(linhaAtual, stringJFugue);
+
+            char[] letras = linhaAtual.toCharArray();
+
+            for (int j = 0; j < letras.length; j++) {
+                char letra = letras[j];
+                char proxima = (j + 1 < letras.length) ? letras[j + 1] : '\0';
+
+                AcaoMusical acao = mapper.mapearCaractere(letra, proxima, estadoVoz, contextoGlobal);
+                stringJFugue.append(acao.executar(estadoVoz, contextoGlobal));
+
+                // se foi Mi bemol (Mb), consome o 'b' que já foi usado pela RegraMiBemol
+                if (letra == 'M' && proxima == 'b') {
+                    j++;
+                }
+            }
+
+            stringJFugue.append(" ");
+        }
+
+        return stringJFugue.toString().trim();
+    }
+
+    /* public String parsearTexto(String textoBruto, ConfiguracaoMusical config) {
+        GlobalContext contextoGlobal = new GlobalContext();
+        contextoGlobal.setBpm(config.getBpm());
+
+        StringBuilder stringJFugue = new StringBuilder();
+        stringJFugue.append("T").append(contextoGlobal.getBpm()).append(" ");
+
+        String[] linhas = textoBruto.split("\\r?\\n");
+
+        for (int i = 0; i < linhas.length; i++) {
+            String linhaAtual = linhas[i].trim();
+
             if (linhaAtual.isEmpty()) {
                 continue;
             }
@@ -81,7 +123,7 @@ public class Parser {
         }
 
         return stringJFugue.toString().trim();
-    }
+    } */
 
     private String processarAtrasoInicial(String linha, StringBuilder stringJFugue) {
         if (linha.startsWith("[")) {
