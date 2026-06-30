@@ -39,6 +39,7 @@ public class Mapper {
             new RegraMiBemol(),
             new RegraNotas(),
             new RegraNotaH(),
+            new RegraPausa(),
             new RegraEspaco(),
             new RegraInstrumento(),
             new RegraOitava(),
