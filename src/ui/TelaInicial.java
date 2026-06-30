@@ -1,6 +1,5 @@
 package ui;
 
-import config.Config;
 import infrastructure.ServidorWeb;
 
 import java.awt.Desktop;
@@ -36,9 +35,5 @@ public class TelaInicial {
 
     public String obterTextoDigitado() {
         return controller.getUltimoTextoRecebido();
-    }
-
-    public Config obterConfigDaTela() {
-        return null;
     }
 }
